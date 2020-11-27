@@ -5,8 +5,10 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     public int scoreValue;
+    public ParticleSystem explosionParticle;
 
     private Rigidbody targetRb;
+    private GameManager gameManager;
 
     private float minSpeed = 12f;
     private float maxSpeed = 16f;
@@ -14,7 +16,6 @@ public class Target : MonoBehaviour
     private float xRange = 4f;
     private float ySpawnPos = -2f;
 
-    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +54,7 @@ public class Target : MonoBehaviour
     {
         gameManager.UpdateScore(scoreValue);
         Destroy(gameObject);
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
     }
 
     private void OnTriggerEnter(Collider other)
